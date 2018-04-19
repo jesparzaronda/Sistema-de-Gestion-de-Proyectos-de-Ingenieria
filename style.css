@@ -1,0 +1,28 @@
+
+#mainNav ul li a{
+	color:black;
+}
+
+#area-login{
+	margin-top:100px;
+}
+
+#mis-proyectos{
+	margin-top:100px;
+}
+#mis-proyectos h3{
+	margin-top:30px;
+}
+#mis-proyectos h3 a{
+	padding: 10px 20px;
+	text-align: center;
+	border:2px solid #333;
+}
+footer {
+	position:fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #333;
+	padding: 15px 0;
+	color: #eee;
+}
