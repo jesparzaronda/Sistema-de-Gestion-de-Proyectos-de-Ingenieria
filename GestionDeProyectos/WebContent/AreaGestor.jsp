@@ -24,29 +24,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 1</span>
+     	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" data-toggle="modal" data-target="#añadirProyecto">
+            <i class="fa fa-fw fa-plus-circle"></i>
+            <span class="nav-link-text">Crear nuevo proyecto</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 2</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 3</span>
-          </a>
-        </li>
+        
 
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#añadirProyecto" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-cogs"></i>
-            <span class="nav-link-text">GESTIONAR PROYECTO</span>
+            <span class="nav-link-text">Gestionar mis proyectos</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
@@ -54,6 +43,7 @@
             </li>            
           </ul>
         </li>
+         
        
        
       
@@ -120,19 +110,8 @@
 
          <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Añadir</button>
          <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Eliminar</button>
-         <button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">Editar</button>
 
-         <h2>Tareas:</h2>
-
-         <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Enviar</button>
-         <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Eliminar</button>
-         <button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">Editar</button>
-
-         <h2>Mensajes:</h2>
-
-         <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Enviar</button>
-         <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Eliminar</button>
-         <button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">Editar</button>
+         
 
         </div>
         <div class="col-lg-8">
@@ -200,6 +179,57 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
+    
+    <!-- Añadir proyecto-->
+    <div class="modal fade" id="añadirProyecto">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Añadir Nuevo Proyecto</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <form class="form-contact" action="CrearProyecto" >   
+		        	<div class="row">          
+                    <div class="col-md-6">
+                    	<strong>Nombre del proyecto:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="nombre"> <br />
+                    </div>     
+                    <div class="col-md-6">
+                    	<strong>Gestor del proyecto:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="gestor"> <br />
+                    </div>          
+                    <div class="col-md-6">
+                    	<strong>Fecha inicio de proyecto:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="fechaInicio"> <br />
+                    </div>  
+                    <div class="col-md-6">
+                    	<strong>Fecha fin de proyecto:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="fechaFinal"> <br />
+                    </div>  
+                    <div class="col-md-6">
+                    	<strong>Empresa</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="empresa"> <br />
+                    </div>   
+                    <div class="col-md-12 text-center btn-submit">
+                      <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Crear proyecto" />  
+                    </div>                    
+                    </div>      
+                  </form>
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
     <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -213,7 +243,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="FormLogout">Logout</a>
           </div>
         </div>
       </div>

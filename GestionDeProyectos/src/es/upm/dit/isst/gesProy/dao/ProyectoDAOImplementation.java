@@ -6,12 +6,12 @@ import es.upm.dit.isst.gesProy.dao.model.Proyecto;
 
 public class ProyectoDAOImplementation implements ProyectoDAO{
 	
-private ProyectoDAOImplementation instance = null;
+private static ProyectoDAOImplementation instance = null;
 	
 	private  ProyectoDAOImplementation() {
 		
 	}
-	private ProyectoDAOImplementation getInstance() {
+	public static ProyectoDAOImplementation getInstance() {
 		if(instance == null) {
 			instance = new ProyectoDAOImplementation();
 			}
