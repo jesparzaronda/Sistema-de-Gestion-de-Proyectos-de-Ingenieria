@@ -2,9 +2,7 @@ package es.upm.dit.isst.gesProy.dao.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,13 +19,13 @@ public class Trabajador implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id 
-	private int id_Trabajador;
 	
 	private String nombre;
 	private String apellidos;
 	private int edad;
+	@Id
 	private String email;
+	
 	private String password;
 	private int privilegios;
 	
@@ -43,14 +41,6 @@ public class Trabajador implements Serializable{
 	public Trabajador() {
 		this.proyectosPosibles = new ArrayList<>();
 		this.registroTrabajador = new ArrayList<>();
-	}
-
-	public int getId_Trabajador() {
-		return id_Trabajador;
-	}
-
-	public void setId_Trabajador(int id_Trabajador) {
-		this.id_Trabajador = id_Trabajador;
 	}
 
 	public String getNombre() {
@@ -92,15 +82,15 @@ public class Trabajador implements Serializable{
 	public void setPrivilegios(int privilegios) {
 		this.privilegios = privilegios;
 	}
-
-	//public int getId_empresa() {
-	//	return id_Empresa;
-	//}
-
-	//public void setId_empresa(int id_empresa) {
-		//this.id_Empresa = id_empresa;
-	//}
 	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -109,13 +99,6 @@ public class Trabajador implements Serializable{
 		this.password = password;
 	}
 
-	//public int getId_Empresa() {
-//		return id_Empresa;
-//	}
-
-	//public void setId_Empresa(int id_Empresa) {
-	//	this.id_Empresa = id_Empresa;
-	//}
 
 	public List<Proyecto> getProyectosTrabajador() {
 		return proyectosPosibles;

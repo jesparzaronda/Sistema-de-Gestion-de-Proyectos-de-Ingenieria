@@ -30,8 +30,13 @@ public class FormLogin extends HttpServlet {
 		if (ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password)) {
 			req.getSession().setAttribute("adminLogged", true);
 			req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
+			resp.sendRedirect(req.getContextPath() + "/admin.jsp");
+		} else if(trabajador != null){
+			req.getSession().setAttribute("trabajadorLogged", email );
 			resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
-		} else {
+		
+		
+		}else {
 				resp.sendRedirect(req.getContextPath() + "/Login.jsp");
 		}
 	}

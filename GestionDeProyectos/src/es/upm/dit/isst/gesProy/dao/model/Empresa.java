@@ -18,9 +18,8 @@ public class Empresa implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id_Empresa;
-	
 	private String Nombre;
+	
 	private String CIF;
 	private int codigoPostal;
 	private int telefono;
@@ -48,14 +47,6 @@ public class Empresa implements Serializable{
 
 	public void setTrabajadoresEmpresa(List<Trabajador> trabajadoresEmpresa) {
 		this.trabajadoresEmpresa = trabajadoresEmpresa;
-	}
-	
-	public int getId_Empresa() {
-		return id_Empresa;
-	}
-
-	public void setId_Empresa(int id_Empresa) {
-		this.id_Empresa = id_Empresa;
 	}
 
 	public String getNombre() {

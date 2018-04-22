@@ -68,13 +68,13 @@ private static TrabajadorDAOImplementation instance = null;
 		}
 	}
 	@Override
-	public Trabajador readTrabajador(int id_Trabajador) {
+	public Trabajador readTrabajador(String email) {
 		Trabajador trabajador = null;
 
 		Session session = SessionFactoryService.get().openSession();
 		try {
 				session.beginTransaction();
-				trabajador = session.get(Trabajador.class, id_Trabajador);
+				trabajador = session.get(Trabajador.class, email);
 				session.getTransaction().commit();
 			} catch (Exception e) {
 				

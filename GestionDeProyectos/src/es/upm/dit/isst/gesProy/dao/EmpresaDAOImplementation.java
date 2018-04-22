@@ -7,12 +7,12 @@ import es.upm.dit.isst.gesProy.dao.SessionFactoryService;
 
 public class EmpresaDAOImplementation implements EmpresaDAO{
 	
-	private EmpresaDAOImplementation instance = null;
+	private static EmpresaDAOImplementation instance = null;
 	
 	private  EmpresaDAOImplementation() {
 		
 	}
-	private EmpresaDAOImplementation getInstance() {
+	public static EmpresaDAOImplementation getInstance() {
 		if(instance == null) {
 			instance = new EmpresaDAOImplementation();
 			}
@@ -32,13 +32,13 @@ public class EmpresaDAOImplementation implements EmpresaDAO{
 		}
 	}
 	@Override
-	public Empresa readEmpresa(int id_Empresa) {
+	public Empresa readEmpresa(String nombre) {
 		Empresa empresa = null;
 
 		Session session = SessionFactoryService.get().openSession();
 		try {
 				session.beginTransaction();
-				empresa = session.get(Empresa.class, id_Empresa);
+				empresa = session.get(Empresa.class, nombre);
 				session.getTransaction().commit();
 			} catch (Exception e) {
 				

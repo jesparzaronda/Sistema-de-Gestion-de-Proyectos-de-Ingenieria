@@ -6,7 +6,7 @@ public interface EmpresaDAO {
 	
 	public void createEmpresa(Empresa empresa);
 	
-	public Empresa readEmpresa(int id_Empresa);
+	public Empresa readEmpresa(String nombre);
 	
 	public void updateEmpresa(Empresa empresa);
 	

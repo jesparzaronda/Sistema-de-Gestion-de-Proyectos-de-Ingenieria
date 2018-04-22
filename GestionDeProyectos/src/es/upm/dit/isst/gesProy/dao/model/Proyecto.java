@@ -2,9 +2,7 @@ package es.upm.dit.isst.gesProy.dao.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,9 +20,8 @@ public class Proyecto implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id_Proyecto;
-	
 	private String nombre;
+	
 	private String gestor;
 	private String fechaInicio;
 	private String fechaFinal;
@@ -42,14 +39,6 @@ public class Proyecto implements Serializable{
 	public Proyecto () {
 		this.trabajadoresPosibles = new ArrayList<>();
 		this.registroProyecto = new ArrayList<>();
-	}
-
-	public int getId_Proyecto() {
-		return id_Proyecto;
-	}
-
-	public void setId_Proyecto(int id_Proyecto) {
-		this.id_Proyecto = id_Proyecto;
 	}
 
 	public String getNombre() {

@@ -105,8 +105,8 @@
           <p><b>Gestor: </b>gestor</p>
           <p><b>Objetivos: </b>objetivos</p>
 
-          <button type="button" class="btn btn-success" onClick="desactivar()" name="start" id="start">Empezar</button>
-          <button type="button" class="btn btn-danger" disabled="" onClick="desactivar()" name="stop" id="stop">Parar</button>
+          <a type="button" class="btn btn-success" onClick="desactivar()" name="start" id="start" href="HorasIniTrabajador">Empezar</a>
+          <a type="button" class="btn btn-danger" disabled="" onClick="desactivar()" name="stop" id="stop" href="HorasFinTrabajador">Parar</a>
           <script type="text/javascript">
 			function desactivar(){
 				if (document.getElementById('start').disabled == false){
@@ -195,7 +195,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="FormLogout">Logout</a>
           </div>
         </div>
       </div>

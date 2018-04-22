@@ -1,10 +1,14 @@
 package es.upm.dit.isst.gesProy.dao.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -18,16 +22,18 @@ public class RegistroTrabajo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id_Registro;
 	
 	@ManyToOne
+	//@JoinColumn(name="Trabajadores")
 	private Trabajador trabajador;
 	@ManyToOne
 	private Proyecto proyecto;
 	
-	private Date horaInicio;
-	private Date horaFinal;
-	private int horasTrabajadas;
+	private Calendar horaInicio;
+	private Calendar horaFinal;
+	private double horasTrabajadas;
 	
 	
 	
@@ -49,22 +55,22 @@ public class RegistroTrabajo implements Serializable{
 	public void setId_Trabajador(Trabajador trabajador) {
 		this.trabajador = trabajador;
 	}
-	public Date getHoraInicio() {
+	public Calendar getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(Calendar horaInicio) {
 		this.horaInicio = horaInicio;
 	}
-	public Date getHoraFinal() {
+	public Calendar getHoraFinal() {
 		return horaFinal;
 	}
-	public void setHoraFinal(Date horaFinal) {
+	public void setHoraFinal(Calendar horaFinal) {
 		this.horaFinal = horaFinal;
 	}
-	public int getHorasTrabajadas() {
+	public double getHorasTrabajadas() {
 		return horasTrabajadas;
 	}
-	public void setHorasTrabajadas(int horasTrabajadas) {
+	public void setHorasTrabajadas(double horasTrabajadas) {
 		this.horasTrabajadas = horasTrabajadas;
 	}
 	public Proyecto getId_Proyecto() {

@@ -26,7 +26,7 @@
 	    </div>
 	    
 	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="#"  style="color:white;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	      <li><a href="FormLogout"  style="color:white;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -58,7 +58,7 @@
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
-		        <form class="form-contact" action="FormLogin" >   
+		        <form class="form-contact" action="FormAñadirNuevaEmpresa" >   
 		        	<div class="row">          
                     <div class="col-md-6">
                     	<strong>Nombre:</strong><br>
@@ -114,7 +114,7 @@
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
-		        <form class="form-contact" action="FormLogin" >
+		        <form class="form-contact" action="AdminServlet" >
                     <div class="row">
 	                    <div class="col-md-4">
 	                    	<strong>Nombre:</strong><br>
@@ -126,7 +126,7 @@
 	                    </div>
 	                    <div class="col-md-3">
 	                    	<strong>Edad:</strong><br>
-	                    	<input class="form-control form-control-lg text-center" type="text" name="eda"><br />
+	                    	<input class="form-control form-control-lg text-center" type="text" name="edad"><br />
 	                    </div>
 	                    <div class="col-md-6">
 	                    	<strong>Email:</strong><br>

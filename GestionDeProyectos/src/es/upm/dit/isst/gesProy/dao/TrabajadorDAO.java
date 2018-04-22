@@ -12,7 +12,7 @@ public interface TrabajadorDAO {
 	
 	public void createTrabajador(Trabajador trabajador);
 	
-	public Trabajador readTrabajador(int id_Trabajador);
+	public Trabajador readTrabajador(String email);
 	
 	public void updateTrabajador(Trabajador trabajador);
 	

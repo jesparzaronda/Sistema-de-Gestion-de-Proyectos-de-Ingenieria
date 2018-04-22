@@ -6,12 +6,12 @@ import es.upm.dit.isst.gesProy.dao.model.RegistroTrabajo;;
 
 public class RegistroTrabajoDAOImplementation implements RegistroTrabajoDAO{
 	
-private RegistroTrabajoDAOImplementation instance = null;
+private static RegistroTrabajoDAOImplementation instance = null;
 	
 	private  RegistroTrabajoDAOImplementation() {
 		
 	}
-	private RegistroTrabajoDAOImplementation getInstance() {
+	public static RegistroTrabajoDAOImplementation getInstance() {
 		if(instance == null) {
 			instance = new RegistroTrabajoDAOImplementation();
 			}
