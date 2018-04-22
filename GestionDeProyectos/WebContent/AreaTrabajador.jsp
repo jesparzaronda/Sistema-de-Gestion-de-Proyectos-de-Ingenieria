@@ -13,6 +13,7 @@
   <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="assets/css/trabajador.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -97,14 +98,26 @@
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-lg-6">
+
           <h2>Información</h2>
           <p><b>Nombre del proyecto: </b>Proyecto 1</p>
           <p><b>Descripción: </b>descripción</p>
           <p><b>Gestor: </b>gestor</p>
           <p><b>Objetivos: </b>objetivos</p>
 
-          <button type="button" class="btn btn-success">Empezar</button>
-          <button type="button" class="btn btn-danger" disabled="">Parar</button>
+          <button type="button" class="btn btn-success" onClick="desactivar()" name="start" id="start">Empezar</button>
+          <button type="button" class="btn btn-danger" disabled="" onClick="desactivar()" name="stop" id="stop">Parar</button>
+          <script type="text/javascript">
+			function desactivar(){
+				if (document.getElementById('start').disabled == false){
+					document.getElementById('start').disabled = true;
+					document.getElementById('stop').disabled = false;
+				}else if (document.getElementById('stop').disabled == false){
+					document.getElementById('start').disabled = false;
+					document.getElementById('stop').disabled = true;
+				}
+			}
+		 </script>
 
         </div>
         <div class="col-lg-6">
