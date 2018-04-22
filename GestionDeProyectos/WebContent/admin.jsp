@@ -19,53 +19,150 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body id="page-top">
-	<section id="area-login">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="text-center">Añadir Trabajador</h2>
-                <div class="devider"></div>
-               
-            </div>              
-            
-            <div class="col-lg-10 offset-lg-1">
-                  <form class="form-contact" action="FormLogin" >
-                    <div class="row">
-                    <div class="col-md-5">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#" style="color:white;">Área Administrador</a>
+	    </div>
+	    
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="#"  style="color:white;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<!-- Button to Open the Modal -->
+					<button type="button" class="btn btn-standard" data-toggle="modal" data-target="#modalTrabajador">
+					  Añadir Trabajador
+					</button>
+				</div>
+				<div class="col-12 text-center">
+					<button type="button" class="btn btn-standard" data-toggle="modal" data-target="#modalEmpresa">
+					  Añadir Empresa
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modalEmpresa">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Añadir Empresa</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <form class="form-contact" action="FormLogin" >   
+		        	<div class="row">          
+                    <div class="col-md-6">
                     	<strong>Nombre:</strong><br>
-                    	<input class="form-control form-control-lg  text-center" type="text" name="nombre" placeholder="Nombre"> <br />
-                    </div>
-                    <div class="col-md-5">
-                    	<strong>Apellidos:</strong><br>
-                    	<input class="form-control form-control-lg text-center" type="text" name="apellidos" placeholder="Apellidos" ><br />
-                    </div>
-                    <div class="col-md-2">
-                    	<strong>Edad:</strong><br>
-                    	<input class="form-control form-control-lg text-center" type="text" name="eda" placeholder="Edad" ><br />
-                    </div>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="nombre"> <br />
+                    </div>     
+                    <div class="col-md-6">
+                    	<strong>CIF:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="cif"> <br />
+                    </div>          
+                    <div class="col-md-6">
+                    	<strong>Código Postal:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="codigoPostal"> <br />
+                    </div>  
+                    <div class="col-md-6">
+                    	<strong>Télefono:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="tel" name="telefono"> <br />
+                    </div>  
+                    <div class="col-md-6">
+                    	<strong>Ciudad:</strong><br>
+                    	<input class="form-control form-control-lg  text-center" type="text" name="ciudad"> <br />
+                    </div>    
                     <div class="col-md-6">
                     	<strong>Email:</strong><br>
-                    	<input class="form-control form-control-lg text-center" type="email" name="email" placeholder="Email" ><br />
-                    </div>
-                    <div class="col-md-6">
-                    	<strong>Contaseña:</strong><br>
-                    	<input class="form-control form-control-lg text-center" type="password" name="password" placeholder="Contraseña" ><br />
-                    </div>
-                    <div class="col-md-6">
-                    	<strong>Empresa:</strong><br>
-                   		<input class="form-control form-control-lg text-center" type="text" name="empresa" placeholder="Empresa" ><br />
-                   	</div>
-                    <div class="col-md-6">
-                    	<strong>Privilegios: (1 = trabajador; 2 = gestor de proyecto; 3 = recursos humanos)</strong><br>
-                    	<input class="form-control form-control-lg text-center" type="text" name="privilegio" placeholder="Privilegio" ><br />
-                    </div>
+                    	<input class="form-control form-control-lg  text-center" type="email" name="email"> <br />
+                    </div>        
                     
                     <div class="col-md-12 text-center btn-submit">
-                      <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Añadir Trabajador" />  
+                      <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Añadir Empresa" />  
                     </div>
+                    </div>      
                   </form>
-            </div>
-        </div>           
-      </section>
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+	
+		<!-- The Modal -->
+		<div class="modal fade" id="modalTrabajador">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Añadir Trabajador</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <form class="form-contact" action="FormLogin" >
+                    <div class="row">
+	                    <div class="col-md-4">
+	                    	<strong>Nombre:</strong><br>
+	                    	<input class="form-control form-control-lg  text-center" type="text" name="nombre"> <br />
+	                    </div>
+	                    <div class="col-md-5">
+	                    	<strong>Apellidos:</strong><br>
+	                    	<input class="form-control form-control-lg text-center" type="text" name="apellidos"><br />
+	                    </div>
+	                    <div class="col-md-3">
+	                    	<strong>Edad:</strong><br>
+	                    	<input class="form-control form-control-lg text-center" type="text" name="eda"><br />
+	                    </div>
+	                    <div class="col-md-6">
+	                    	<strong>Email:</strong><br>
+	                    	<input class="form-control form-control-lg text-center" type="email" name="email"><br />
+	                    </div>
+	                    <div class="col-md-6">
+	                    	<strong>Contaseña:</strong><br>
+	                    	<input class="form-control form-control-lg text-center" type="password" name="password" ><br />
+	                    </div>
+	                    <div class="col-md-12">
+	                    	<strong>Empresa:</strong><br>
+	                   		<input class="form-control form-control-lg text-center" type="text" name="empresa"><br />
+	                   	</div>
+	                    <div class="col-md-12">
+	                    	<strong>Privilegios: (1 = trabajador; 2 = gestor de proyecto; 3 = recursos humanos)</strong><br>
+	                    	<input class="form-control form-control-lg text-center" type="text" name="privilegio"><br />
+	                    </div>
+	                    
+	                    <div class="col-md-12 text-center btn-submit">
+	                      <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Añadir Trabajador" />  
+	                 </div>           	
+                  </form>
+		      </div>
+		     
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		
+		
+	</section>
+	
 
     <!-- Footer -->
     <footer>
@@ -77,5 +174,12 @@
         </div>
       </div>
     </footer>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 </html>
