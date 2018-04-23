@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -108,7 +109,7 @@
 
         <h2>Trabajadores:</h2>
 
-         <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Añadir</button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#añadirTrabajador"style="margin-bottom: 20px;">Añadir</button>
          <button type="button" class="btn btn-info" style="margin-bottom: 20px;">Eliminar</button>
 
          
@@ -198,11 +199,7 @@
                     <div class="col-md-6">
                     	<strong>Nombre del proyecto:</strong><br>
                     	<input class="form-control form-control-lg  text-center" type="text" name="nombre"> <br />
-                    </div>     
-                    <div class="col-md-6">
-                    	<strong>Gestor del proyecto:</strong><br>
-                    	<input class="form-control form-control-lg  text-center" type="text" name="gestor"> <br />
-                    </div>          
+                    </div>               
                     <div class="col-md-6">
                     	<strong>Fecha inicio de proyecto:</strong><br>
                     	<input class="form-control form-control-lg  text-center" type="text" name="fechaInicio"> <br />
@@ -217,6 +214,45 @@
                     </div>   
                     <div class="col-md-12 text-center btn-submit">
                       <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Crear proyecto" />  
+                    </div>                    
+                    </div>      
+                  </form>
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		<!-- Añadir trabajador al proyecto-->
+    <div class="modal fade" id="añadirTrabajador">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Añadir Trabajador</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <form class="form-contact" action="AñadirTrabajadorProyecto" >   
+		        	<div class="row">          
+                    <div class="col-md-12">
+                    	<strong>Seleccionar trabajador:</strong><br>
+                    	<select>
+                    		<c:forEach items="${trabajadores_list}" var="trabajador">
+                    			<option>${trabajador.nombre} ${trabajador.apellidos}</option>
+                    		</c:forEach>
+                    	</select>
+                    </div>     
+                       
+                    <div class="col-md-12 text-center btn-submit">
+                      <input class="btn btn-default btn-lg-xl " name='boton' type="submit" value="Añadir trabajador al proyecto" />  
                     </div>                    
                     </div>      
                   </form>

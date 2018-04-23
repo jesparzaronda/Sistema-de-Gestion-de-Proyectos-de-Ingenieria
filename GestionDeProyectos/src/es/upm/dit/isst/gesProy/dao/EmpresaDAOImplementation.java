@@ -1,5 +1,8 @@
 package es.upm.dit.isst.gesProy.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 import es.upm.dit.isst.gesProy.dao.model.Empresa;
@@ -17,6 +20,21 @@ public class EmpresaDAOImplementation implements EmpresaDAO{
 			instance = new EmpresaDAOImplementation();
 			}
 		return instance;
+	}
+	public List<Empresa> readAllEmpresa() {
+		List<Empresa> empresas = new ArrayList<>();
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			empresas.addAll(session.createQuery("from Empresa").list());
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally {
+				session.close();
+		}
+		
+		return empresas;
 	}
 	@Override
 	public void createEmpresa(Empresa empresa) {

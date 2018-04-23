@@ -31,13 +31,23 @@ public class FormLogin extends HttpServlet {
 			req.getSession().setAttribute("adminLogged", true);
 			req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
 			resp.sendRedirect(req.getContextPath() + "/admin.jsp");
-		} else if(trabajador != null){
-			req.getSession().setAttribute("trabajadorLogged", email );
-			resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
+		} else if(trabajador != null ) {
+			if(trabajador.getPrivilegios() == 1) {
+				req.getSession().setAttribute("trabajadorLogged", email );
+				resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
+			} else if(trabajador.getPrivilegios() == 2) {
+				req.getSession().setAttribute("gestorLogged", email );
+				req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
+				resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
+			}	else  if(trabajador.getPrivilegios() == 3) {
+				req.getSession().setAttribute("RRHHLogged", email );
+				//Aqui nos llevaria a la pagina de recursos humanos
+			}
 		
 		
 		}else {
 				resp.sendRedirect(req.getContextPath() + "/Login.jsp");
+				
 		}
 	}
 

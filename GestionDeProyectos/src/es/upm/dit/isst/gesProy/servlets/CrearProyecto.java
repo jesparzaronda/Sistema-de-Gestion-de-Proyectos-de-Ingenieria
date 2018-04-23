@@ -1,5 +1,7 @@
 package es.upm.dit.isst.gesProy.servlets;
 
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +12,10 @@ import com.itextpdf.io.IOException;
 
 import es.upm.dit.isst.gesProy.dao.EmpresaDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.gesProy.dao.TrabajadorDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.model.Empresa;
 import es.upm.dit.isst.gesProy.dao.model.Proyecto;
+import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 
 /**
  * Servlet implementation class FormAñadirProyecto
@@ -27,20 +31,38 @@ public class CrearProyecto extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, java.io.IOException {
 		
 		String nombre = req.getParameter("nombre");
-		String gestor = req.getParameter("gestor");
 		String fechaInicio = req.getParameter("fechaInicio");		
 		String fechaFinal = req.getParameter("fechaFinal");	
-		Empresa empresa = (Empresa) req.getAttribute("Empresa");
+		String nombreEmpresa = req.getParameter("empresa");
+		Empresa empresaBuscada = null;
+		List<Empresa> empresas = EmpresaDAOImplementation.getInstance().readAllEmpresa();
+		for(Empresa empresa : empresas) {
+			if ((empresa.getNombre()).equals(nombreEmpresa)) {
+				empresaBuscada = empresa;
+			}
+		}
+		String emailGestor = (String) req.getSession().getAttribute("gestorLogged");
+		Trabajador gestorBuscado = null;
+		List<Trabajador> gestores = TrabajadorDAOImplementation.getInstance().readAllTrabajador();
+		
+		for(Trabajador gestor : gestores) {
+			if ((gestor.getEmail()).equals(emailGestor)) {
+				if(gestor.getPrivilegios() == 2) {
+				gestorBuscado = gestor;
+				}
+			}
+		}
 		
 		
-		//Creamos la nueva empresa
+		//Creamos el nuevo Proyecto
 		Proyecto nuevoProyecto = new Proyecto();
 		
 		nuevoProyecto.setNombre(nombre);
-		nuevoProyecto.setGestor(gestor);
+		nuevoProyecto.setGestor(gestorBuscado.getNombre() + " " +gestorBuscado.getApellidos());
 		nuevoProyecto.setFechaInicio(fechaInicio);
 		nuevoProyecto.setFechaFinal(fechaFinal);
-		nuevoProyecto.setId_Empresa(empresa);
+		nuevoProyecto.setId_Empresa(empresaBuscada);
+		
 	
 		
 		ProyectoDAOImplementation.getInstance().createProyecto(nuevoProyecto);
