@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.gesProy.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.TrabajadorDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 
@@ -38,6 +39,7 @@ public class FormLogin extends HttpServlet {
 			} else if(trabajador.getPrivilegios() == 2) {
 				req.getSession().setAttribute("gestorLogged", email );
 				req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
+				req.getSession().setAttribute("proyectos_list", ProyectoDAOImplementation.getInstance().readAllProyecto());
 				resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 			}	else  if(trabajador.getPrivilegios() == 3) {
 				req.getSession().setAttribute("RRHHLogged", email );

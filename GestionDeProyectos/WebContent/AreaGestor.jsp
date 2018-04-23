@@ -31,17 +31,27 @@
             <span class="nav-link-text">Crear nuevo proyecto</span>
           </a>
         </li>
-        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link">
+            <i class="fa fa-fw fa-circle"></i>
+            <span class="nav-link-text">Trabajar en mis proyectos</span>
+          </a>
+        </li>
 
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#añadirProyecto" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#misProyectosGestionados" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-cogs"></i>
             <span class="nav-link-text">Gestionar mis proyectos</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-            <li>
-              <a href="">Proyecto 2</a>
-            </li>            
+          <ul class="sidenav-second-level collapse" id="misProyectosGestionados" >
+          <% request.setAttribute("proyecto_selec", "ISST"); %>
+           <c:forEach items="${proyectos_list}" var="proyecto">
+            <li >
+           			<a href="SeleccionarProyecto" name="proyecto_seleccionad">${proyecto.nombre}</a>		
+           		</li> 
+           		
+           	</c:forEach>   
+           	       
           </ul>
         </li>
          
@@ -101,10 +111,8 @@
       <div class="row">
         <div class="col-lg-4">
           <h2>Información</h2>
-          <p><b>Nombre del proyecto: </b>Proyecto 1</p>
-          <p><b>Descripción: </b>descripción</p>
+          <p><b>Nombre del proyecto: </b>${proyecto_seleccionado}</p>
           <p><b>Gestor: </b>gestor</p>
-          <p><b>Objetivos: </b>objetivos</p>
           <button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">Editar</button>
 
         <h2>Trabajadores:</h2>
@@ -131,26 +139,6 @@
                       </thead>
                       
                       <tbody>
-                        <tr>
-                          <td>Trabajador 1</td>
-                          <td>02/03/2018</td>
-                          <td>25</td>
-                        </tr>     
-                        <tr>
-                          <td>Trabajador 2</td>
-                          <td>02/03/2018</td>
-                          <td>20</td>
-                        </tr>   
-                        <tr>
-                          <td>Trabajador 3</td>
-                          <td>05/03/2018</td>
-                          <td>17</td>
-                        </tr>   
-                        <tr>
-                          <td>Trabajador 4</td>
-                          <td>06/03/2018</td>
-                          <td>18</td>
-                        </tr>   
                         <tr>
                           <td>Trabajador 5</td>
                           <td>13/03/2018</td>
@@ -240,11 +228,11 @@
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
-		        <form class="form-contact" action="AñadirTrabajadorProyecto" >   
+		        <form class="form-contact" action="AnadirTrabajador" >   
 		        	<div class="row">          
                     <div class="col-md-12">
                     	<strong>Seleccionar trabajador:</strong><br>
-                    	<select>
+                    	<select name="trabajadorEscogido">
                     		<c:forEach items="${trabajadores_list}" var="trabajador">
                     			<option>${trabajador.nombre} ${trabajador.apellidos}</option>
                     		</c:forEach>

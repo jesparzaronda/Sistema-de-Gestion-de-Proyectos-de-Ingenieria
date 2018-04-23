@@ -34,8 +34,14 @@ public class HorasFinTrabajador extends HttpServlet {
 		RegistroTrabajo registro = new RegistroTrabajo();
 		
 		double milisec = fechaFinal.getTimeInMillis() - fechaInicio.getTimeInMillis();
-		double horasTrabajadas = milisec/1000/60/24;
-		registro.setHorasTrabajadas(horasTrabajadas);
+		int horas = (int)milisec/3600000;
+		double restohora = milisec%3600000;
+		int minutos = (int)restohora/60000;
+		double restominuto = restohora%60000;
+		int segundos = (int)restominuto/1000;
+		
+		String tiempoTrabajado = String.valueOf(horas)+"h "+String.valueOf(minutos)+"min "+String.valueOf(segundos)+ "s ";
+		registro.setHorasTrabajadas(tiempoTrabajado);
 		
 		String emailTrabajador = (String)req.getSession().getAttribute("trabajadorLogged");
 		List<Trabajador> trabajadores = TrabajadorDAOImplementation.getInstance().readAllTrabajador();

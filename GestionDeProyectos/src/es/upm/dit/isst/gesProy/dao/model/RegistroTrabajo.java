@@ -33,7 +33,7 @@ public class RegistroTrabajo implements Serializable{
 	
 	private Calendar horaInicio;
 	private Calendar horaFinal;
-	private double horasTrabajadas;
+	private String horasTrabajadas;
 	
 	
 	
@@ -67,11 +67,13 @@ public class RegistroTrabajo implements Serializable{
 	public void setHoraFinal(Calendar horaFinal) {
 		this.horaFinal = horaFinal;
 	}
-	public double getHorasTrabajadas() {
-		return horasTrabajadas;
-	}
-	public void setHorasTrabajadas(double horasTrabajadas) {
-		this.horasTrabajadas = horasTrabajadas;
+	
+	//Aquí haria falta recorrer el string e ir guardando las horas, minutos y segunos para sumar el tiempo total
+//	public double getHorasTrabajadas() {
+//		return horasTrabajadas;
+//	}
+	public void setHorasTrabajadas(String tiempoTrabajado) {
+		this.horasTrabajadas = tiempoTrabajado;
 	}
 	public Proyecto getId_Proyecto() {
 		return proyecto;

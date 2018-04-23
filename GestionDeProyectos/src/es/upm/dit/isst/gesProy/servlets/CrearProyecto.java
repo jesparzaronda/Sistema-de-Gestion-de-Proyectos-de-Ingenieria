@@ -54,6 +54,7 @@ public class CrearProyecto extends HttpServlet {
 		}
 		
 		
+		
 		//Creamos el nuevo Proyecto
 		Proyecto nuevoProyecto = new Proyecto();
 		
@@ -66,6 +67,7 @@ public class CrearProyecto extends HttpServlet {
 	
 		
 		ProyectoDAOImplementation.getInstance().createProyecto(nuevoProyecto);
+		req.getSession().setAttribute("proyectos_list", ProyectoDAOImplementation.getInstance().readAllProyecto());
 		resp.sendRedirect(req.getContextPath()+ "/AreaGestor.jsp");
 		
 	}

@@ -1,8 +1,12 @@
 package es.upm.dit.isst.gesProy.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 import es.upm.dit.isst.gesProy.dao.model.Proyecto;
+import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 
 public class ProyectoDAOImplementation implements ProyectoDAO{
 	
@@ -73,6 +77,23 @@ private static ProyectoDAOImplementation instance = null;
 				session.close();
 			}
 		
+	}
+	
+
+	public List<Proyecto> readAllProyecto() {
+		List<Proyecto> proyectos = new ArrayList<>();
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			proyectos.addAll(session.createQuery("from Proyecto").list());
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally {
+				session.close();
+		}
+		
+		return proyectos;
 	}
 
 }
