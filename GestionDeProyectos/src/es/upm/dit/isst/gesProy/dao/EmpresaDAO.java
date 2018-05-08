@@ -1,12 +1,16 @@
 package es.upm.dit.isst.gesProy.dao;
 
+import java.util.List;
+
 import es.upm.dit.isst.gesProy.dao.model.Empresa;
 
 public interface EmpresaDAO {
 	
+	public List<Empresa> readAllEmpresa();
+	
 	public void createEmpresa(Empresa empresa);
 	
-	public Empresa readEmpresa(int id_Empresa);
+	public Empresa readEmpresa(String nombre);
 	
 	public void updateEmpresa(Empresa empresa);
 	

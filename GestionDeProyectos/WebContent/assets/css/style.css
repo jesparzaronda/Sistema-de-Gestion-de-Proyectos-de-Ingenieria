@@ -1,14 +1,46 @@
 
 
 #area-login{
-	margin-top:100px;
+	
+	padding:100px 15px;
+}
+#area-login h2, #area-login strong{
+	color:white;
 }
 
 footer {
 	position:fixed;
 	bottom: 0;
 	width: 100%;
-	background-color: #333;
+	background-color: #fff;
 	padding: 15px 0;
-	color: #eee;
+	color: #000;
+	margin-top:100px;
+}
+
+.btn-submit{
+	margin-bottom:100px;
+}
+
+#page-top{
+	background-color:#004d66;
+}
+.btn-standard{
+	background-color:#fff;
+	color:black;
+	padding: 15px 20px;
+	margin:30px 0;
+	cursor:pointer;
+}
+.btn-standard:hover{
+	background-color:#333;
+	color:white;
+}
+input.form-control{
+	padding: 5px 10px;
+	font-size:14px;
+}
+
+button{
+	cursor:pointer !important;
 }

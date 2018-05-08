@@ -11,6 +11,7 @@ public interface ProyectoDAO {
 	public void updateProyecto(Proyecto proyecto);
 	
 	public void deleteProyecto(Proyecto proyecto);
+	
 
 	
 }

@@ -68,13 +68,13 @@ private static TrabajadorDAOImplementation instance = null;
 		}
 	}
 	@Override
-	public Trabajador readTrabajador(int id_Trabajador) {
+	public Trabajador readTrabajador(String email) {
 		Trabajador trabajador = null;
 
 		Session session = SessionFactoryService.get().openSession();
 		try {
 				session.beginTransaction();
-				trabajador = session.get(Trabajador.class, id_Trabajador);
+				trabajador = session.get(Trabajador.class, email);
 				session.getTransaction().commit();
 			} catch (Exception e) {
 				
@@ -110,6 +110,25 @@ private static TrabajadorDAOImplementation instance = null;
 				session.close();
 			}
 		
+	}
+	
+	public String obtenerNombreTrabajador(String email) {
+		Trabajador trabajador= null;
+		String nombreCompleto = null;
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			trabajador = (Trabajador) session.createQuery("select t from Trabajador t where"
+					+ " t.email = :email")
+					.setParameter("email", email).uniqueResult();
+			nombreCompleto = trabajador.getNombre() + " " +trabajador.getApellidos();
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally{
+			session.close();
+		}
+		return nombreCompleto;
 	}
 
 }
