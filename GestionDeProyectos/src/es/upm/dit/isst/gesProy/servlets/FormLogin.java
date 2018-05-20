@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.gesProy.dao.ProyectoDAOImplementation;
+import es.upm.dit.isst.gesProy.dao.RegistroTrabajoDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.TrabajadorDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.model.Proyecto;
 import es.upm.dit.isst.gesProy.dao.model.Trabajador;
@@ -38,6 +39,13 @@ public class FormLogin extends HttpServlet {
 		} else if(trabajador != null ) {
 			if(trabajador.getPrivilegios() == 1) {
 				req.getSession().setAttribute("trabajadorLogged", email );
+				List<Proyecto> proyectosTrabajador = TrabajadorDAOImplementation.getInstance().getProyectosTrabajador(email);
+				req.getSession().setAttribute("proyectos_trabajador", proyectosTrabajador);
+				req.getSession().setAttribute("proyecto_seleccionado", proyectosTrabajador.get(0).getNombre());
+				req.getSession().setAttribute("proyecto_trabajador", proyectosTrabajador.get(0).getGestor());
+				for(int i = 0; i< proyectosTrabajador.size(); i ++) {
+					System.out.println(proyectosTrabajador.get(i).getNombre());
+				}
 				resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
 			} else if(trabajador.getPrivilegios() == 2) {
 				req.getSession().setAttribute("gestorLogged", email );
@@ -53,7 +61,10 @@ public class FormLogin extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 			}	else  if(trabajador.getPrivilegios() == 3) {
 				req.getSession().setAttribute("RRHHLogged", email );
-				//Aqui nos llevaria a la pagina de recursos humanos
+				req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
+				req.getSession().setAttribute("proyectos_list", ProyectoDAOImplementation.getInstance().readAllProyecto());
+				
+				resp.sendRedirect(req.getContextPath() + "/AreaRecursos.jsp");
 			}
 		
 		

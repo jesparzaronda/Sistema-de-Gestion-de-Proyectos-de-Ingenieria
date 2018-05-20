@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Área Trabajador</title>
 <!-- Bootstrap core CSS-->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,25 +27,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 1</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 2</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-circle"></i>
-            <span class="nav-link-text">Proyecto 3</span>
-          </a>
-        </li>
-       
+        <li class="nav-item" data-toggle="tooltip" data-placement="right"
+				title="Example Pages"><a
+				class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+				href="#misProyectosGestionados" data-parent="#exampleAccordion">
+					<i class="fa fa-fw fa-cogs"></i> <span class="nav-link-text">
+						Mis proyectos</span>
+			</a>
+				<ul class="sidenav-second-level collapse"
+					id="misProyectosGestionados">
+
+					<c:forEach items="${proyectos_trabajador}" var="proyecto">
+						<li>
+							<form action="SeleccionarProyecto">
+								<input type="hidden" name="nombre_proy"
+									value="${proyecto.nombre}" />
+								<button type="submit">"${proyecto.nombre}"</button>
+							</form>
+						</li>
+					</c:forEach>
+
+				</ul></li>
        
       
       </ul>
@@ -81,7 +85,7 @@
         
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout: user</a>
+            <i class="fa fa-fw fa-sign-out"></i>Logout: ${trabajadorLogged}</a>
         </li>
       </ul>
     </div>
@@ -93,17 +97,15 @@
         <li class="breadcrumb-item">
           <a href="#">Proyectos</a>
         </li>
-        <li class="breadcrumb-item active">Proyecto 1</li>
+        <li class="breadcrumb-item active">${proyecto_seleccionado}</li>
       </ol>
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-lg-6">
 
           <h2>Información</h2>
-          <p><b>Nombre del proyecto: </b>Proyecto 1</p>
-          <p><b>Descripción: </b>descripción</p>
-          <p><b>Gestor: </b>gestor</p>
-          <p><b>Objetivos: </b>objetivos</p>
+          <p><b>Nombre del proyecto: </b>${proyecto_seleccionado}</p>
+          <p><b>Gestor: </b>${proyecto_trabajador}</p>
 
           <a type="button" class="btn btn-success" onClick="desactivar()" name="start" id="start" href="HorasIniTrabajador">Empezar</a>
           <a type="button" class="btn btn-danger" disabled="" onClick="desactivar()" name="stop" id="stop" href="HorasFinTrabajador">Parar</a>
@@ -160,10 +162,10 @@
             <div class="card mb-3 col-lg-12">
               <div class="card-header">
                 <i class="fa fa-area-chart"></i> Horas trabajadas en el proyecto</div>
-              <div class="card-body">
+               <div class="card-body">
                 <canvas id="myAreaChart" width="100%" height="30"></canvas>
-              </div>
-              </div>
+              </div> 
+             
               </div>
             </div>
      
@@ -214,6 +216,10 @@
     <!-- Custom scripts for this page-->
     <script src="assets/js/sb-admin-datatables.min.js"></script>
     <script src="assets/js/sb-admin-charts.js"></script>
+    
+    
+    
+    
   </div>
 </body>
 

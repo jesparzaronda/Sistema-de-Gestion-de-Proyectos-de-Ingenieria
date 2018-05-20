@@ -33,11 +33,13 @@
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link" data-toggle="modal"
-				data-target="#añadirProyecto"> <i
+				title="Tables"><a class="nav-link" href="AreaRecursos.jsp"><i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
 			</a></li>
-			
+			<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				title="Tables"><a class="nav-link" href="AreaRecursos-proyectos"> <i
+					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Proyectos</span>
+			</a></li>
 
 			
 		</ul>
@@ -81,48 +83,60 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="AreaRecursos.jsp">Área Recursos Humanos</a>
 				</li>
-				<li class="breadcrumb-item active">${trabajador.getNombre()} ${trabajador.getApellidos()}</li>
+				<li class="breadcrumb-item active">${proyecto.getNombre()}</li>
 			</ol>
-			<div class="row">				
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-primary o-hidden h-100">
-		            <div class="card-body">
-		                <div class="mr-5">26 Horas Trabajadas</div>
-		            </div>
-		            
-		          </div>
-		        </div>
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-warning o-hidden h-100">
-		            <div class="card-body">
-		              
-		              <div class="mr-5">${numProyectos} Proyectos</div>
-		            </div>
-		            
-		          </div>
-		        </div>
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-success o-hidden h-100">
-		            <div class="card-body">
-		              <div class="mr-5">Esfuerzo 78%</div>
-		            </div>            
-		          </div>
-		        </div>        
-		     </div>
-		     
-		     <div class="col-lg-12">
-					<h2>Información Trabajador:</h2>
-					<p><b>Nombre: </b>${trabajador.getNombre()}</p>
-					<p><b>Apellidos: </b>${trabajador.getApellidos()}</p>
-					<p><b>Edad: </b>${trabajador.getEdad()}</p>
-					<p><b>Email: </b>${trabajador.getEmail()}</p>
-					<p><b>Empresa: </b>${trabajador.getEmpresa().getNombre()}</p>
+			
+		    <div class="row">
+		     <div class="col-lg-4">
+					<h2>Información del proyecto:</h2>
+					<p><b>Nombre: </b>${proyecto.getNombre()}</p>
+					<p><b>Gestor: </b>${proyecto.getGestor()}</p>
+					<p><b>Fecha de Inicio: </b>${proyecto.getFechaInicio()}</p>
+					<p><b>Fecha de Fin: </b>${proyecto.getFechaFinal()}</p>
+					<p><b>Número de Trabajadores: </b></p>
 					
 					
 
 
 				</div>
+				<div class="col-lg-8">
+					<div class="row">
+						<div class="card mb-3 col-lg-12">
+							<div class="card-header">
+								<i class="fa fa-table"></i>Trabajadores en el proyecto
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%"
+										cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th>Fecha comienzo</th>
+												<th>Horas trabajaas</th>
+											</tr>
+										</thead>
 
+										<tbody>
+
+												<c:forEach items="${trabajadores_proyecto}" var="trabajadorproy" varStatus="status">
+												<tr>
+													<td>${trabajadorproy.nombre} ${trabajadorproy.apellidos}</td>
+													<td>13/03/2018</td>
+													<td>${lista_horas[status.index]}</td>
+												</tr>
+												</c:forEach>																		
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+				
+				
 			<div class="container">
 			</div>
 		</div>

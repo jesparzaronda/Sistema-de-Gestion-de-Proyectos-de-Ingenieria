@@ -51,6 +51,7 @@ public class AnadirTrabajador extends HttpServlet {
 	
 		//Añadimos trabajador al proyecto
 		List<Trabajador> trabajadoresProyecto = proyectoEscogido.getTrabajadoresProyecto();
+		List<Proyecto> proyectosTrabajador = trabajadorEscogido.getProyectosTrabajador();
 
 		boolean contains = false;
 			//Comprobamos primero si ya está añadido
@@ -62,12 +63,16 @@ public class AnadirTrabajador extends HttpServlet {
 			//Si no está lo añadimos
 		if(!contains) {	
 			trabajadoresProyecto.add(trabajadorEscogido);
+			proyectosTrabajador.add(proyectoEscogido);
 			proyectoEscogido.setTrabajadoresProyecto(trabajadoresProyecto);
+			trabajadorEscogido.setProyectosTrabajador(proyectosTrabajador);
 		}	
 		
 		//Actualizamos y redirigimos
 		req.getSession().setAttribute("trabajadores_proyecto", trabajadoresProyecto);
+		req.getSession().setAttribute("proyectos_trabajador", proyectosTrabajador);
 		ProyectoDAOImplementation.getInstance().updateProyecto(proyectoEscogido);
+		TrabajadorDAOImplementation.getInstance().updateTrabajador(trabajadorEscogido);
 		resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 	}
 }

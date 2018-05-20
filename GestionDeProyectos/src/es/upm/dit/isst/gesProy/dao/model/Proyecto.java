@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -29,16 +30,16 @@ public class Proyecto implements Serializable{
 	@ManyToOne
 	private Empresa empresa;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy="proyectosPosibles")
 	private List<Trabajador> trabajadoresPosibles;
 	
 	
-	@OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER)
-	private List<RegistroTrabajo> registroProyecto;
+	
 	
 	public Proyecto () {
 		
-		this.registroProyecto = new ArrayList<>();
+		this.trabajadoresPosibles = new ArrayList<>();
+		
 	}
 
 	public String getNombre() {
@@ -89,13 +90,6 @@ public class Proyecto implements Serializable{
 		this.trabajadoresPosibles = trabajadoresPosibles;
 	}
 
-	public List<RegistroTrabajo> getRegistroProyecto() {
-		return registroProyecto;
-	}
-
-	public void setRegistroProyecto(List<RegistroTrabajo> registroProyecto) {
-		this.registroProyecto = registroProyecto;
-	}
 	public void inicializarListTrabajadores() {
 		this.trabajadoresPosibles = new ArrayList<>();
 	}

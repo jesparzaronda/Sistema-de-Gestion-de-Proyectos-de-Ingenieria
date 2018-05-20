@@ -59,7 +59,7 @@
 							<form action="SeleccionarProyecto">
 								<input type="hidden" name="nombre_proy"
 									value="${proyecto.nombre}" />
-								<button type="submit">"${proyecto.nombre}"</button>
+								<button type="submit">${proyecto.nombre}</button>
 							</form>
 						</li>
 					</c:forEach>
@@ -99,7 +99,7 @@
 
 			<li class="nav-item"><a class="nav-link" data-toggle="modal"
 				data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout:
-					${proyecto_gestor}
+					${gestorLogged}
 			</a></li>
 		</ul>
 	</div>
@@ -150,17 +150,17 @@
 											<tr>
 												<th>Nombre</th>
 												<th>Fecha comienzo</th>
-												<th>Horas trabajaas</th>
+												<th>Horas trabajadas</th>
 											</tr>
 										</thead>
 
 										<tbody>
 
-												<c:forEach items="${trabajadores_proyecto}" var="trabajadorproy">
+												<c:forEach items="${trabajadores_proyecto}" var="trabajadorproy" varStatus="status">
 												<tr>
 													<td>${trabajadorproy.nombre} ${trabajadorproy.apellidos}</td>
 													<td>13/03/2018</td>
-													<td>8</td>
+													<td>${lista_horas[status.index]}</td>
 												</tr>
 												</c:forEach>																		
 											

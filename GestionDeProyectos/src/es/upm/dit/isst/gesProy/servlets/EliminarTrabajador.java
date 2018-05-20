@@ -50,18 +50,28 @@ public class EliminarTrabajador extends HttpServlet {
 		
 	
 		//Eliminamos trabajador del proyecto
-		List<Trabajador> trabajadoresProyecto = proyectoEscogido.getTrabajadoresProyecto();		
+		List<Trabajador> trabajadoresProyecto = proyectoEscogido.getTrabajadoresProyecto();	
+		List<Proyecto> proyectosTrabajador = trabajadorEscogido.getProyectosTrabajador();	
 		for(int i=trabajadoresProyecto.size()-1; i>-1; i--) {
 			if(trabajadoresProyecto.get(i).getNombre().equals(trabajadorEscogido.getNombre()) && trabajadoresProyecto.get(i).getApellidos().equals(trabajadorEscogido.getApellidos())) {
 				trabajadoresProyecto.remove(i);
 			}
 		}
+		//Eliminamos el proyecto para ese trabajador
+		for(int i=proyectosTrabajador.size()-1; i>-1; i--) {
+			if(proyectosTrabajador.get(i).getNombre().equals(proyectoEscogido.getNombre()))  {
+				proyectosTrabajador.remove(i);
+			}
+		}
 		proyectoEscogido.setTrabajadoresProyecto(trabajadoresProyecto);
+		trabajadorEscogido.setProyectosTrabajador(proyectosTrabajador);
 		
 		
 		//Actualizamos y redirigimos
 		req.getSession().setAttribute("trabajadores_proyecto", trabajadoresProyecto);
+		req.getSession().setAttribute("proyectos_trabajador", proyectosTrabajador);
 		ProyectoDAOImplementation.getInstance().updateProyecto(proyectoEscogido);
+		TrabajadorDAOImplementation.getInstance().updateTrabajador(trabajadorEscogido);
 		resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 		
 	}

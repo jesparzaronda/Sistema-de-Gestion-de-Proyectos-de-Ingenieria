@@ -22,7 +22,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-		id="mainNav"> <a class="navbar-brand" href="AreaRecursos.jsp">Área Recursos Humanos
+		id="mainNav"> <a class="navbar-brand" href="index.html">Área Recursos Humanos
 </a>
 	<button class="navbar-toggler navbar-toggler-right" type="button"
 		data-toggle="collapse" data-target="#navbarResponsive"
@@ -33,10 +33,14 @@
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link" data-toggle="modal"
-				data-target="#añadirProyecto"> <i
+				title="Tables"><a class="nav-link" href="AreaRecursos.jsp"><i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
 			</a></li>
+			<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				title="Tables"><a class="nav-link" href="#"> <i
+					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Proyectos</span>
+			</a></li>
+			
 			
 
 			
@@ -70,7 +74,7 @@
 
 			<li class="nav-item"><a class="nav-link" data-toggle="modal"
 				data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout:
-				${RRHHLogged}
+					${RRHHLogged}
 			</a></li>
 		</ul>
 	</div>
@@ -79,52 +83,62 @@
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="AreaRecursos.jsp">Área Recursos Humanos</a>
+				<li class="breadcrumb-item"><a href="#">Área Recursos Humanos</a>
 				</li>
-				<li class="breadcrumb-item active">${trabajador.getNombre()} ${trabajador.getApellidos()}</li>
+				<li class="breadcrumb-item active">Proyectos</li>
 			</ol>
-			<div class="row">				
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-primary o-hidden h-100">
-		            <div class="card-body">
-		                <div class="mr-5">26 Horas Trabajadas</div>
-		            </div>
-		            
-		          </div>
-		        </div>
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-warning o-hidden h-100">
-		            <div class="card-body">
-		              
-		              <div class="mr-5">${numProyectos} Proyectos</div>
-		            </div>
-		            
-		          </div>
-		        </div>
-		        <div class="col-xl-3 col-sm-6 mb-3">
-		          <div class="card text-white bg-success o-hidden h-100">
-		            <div class="card-body">
-		              <div class="mr-5">Esfuerzo 78%</div>
-		            </div>            
-		          </div>
-		        </div>        
-		     </div>
-		     
-		     <div class="col-lg-12">
-					<h2>Información Trabajador:</h2>
-					<p><b>Nombre: </b>${trabajador.getNombre()}</p>
-					<p><b>Apellidos: </b>${trabajador.getApellidos()}</p>
-					<p><b>Edad: </b>${trabajador.getEdad()}</p>
-					<p><b>Email: </b>${trabajador.getEmail()}</p>
-					<p><b>Empresa: </b>${trabajador.getEmpresa().getNombre()}</p>
-					
-					
+			<!-- Icon Cards-->
+			<div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Datos Trabajadores</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+            
+            <div class="row">
+            <div class="col-sm-12">
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <th rowspan="1" colspan="1">Nombre del proyecto</th>
+                <th rowspan="1" colspan="1">Gestor</th>
+                <th rowspan="1" colspan="1">Fecha de inicio</th>
+                <th rowspan="1" colspan="1">Fecha de fin</th>
+                <th rowspan="1" colspan="1">Número de trabajadores</th>
+                <th rowspan="1" colspan="1">Informe</th></thead>
+              
+              </thead>
+              <tbody>                               
+                
+     
+                
+            <c:forEach items="${proyectos_list}" var="proyecto">
+              <tr role="row" class="odd">
+                  <td class="sorting_1">${proyecto.getNombre()} </td>
+                  <td>       ${proyecto.getGestor()}           </td>
+                  <td>${proyecto.getFechaInicio()}  </td>
+                  <td>${proyecto.getFechaFinal()}  </td>
+                  <td>188</td>
+                  <td>
+                  
+                  <form action="InformeProyecto">
+					<input type="hidden" name="nombre_proyecto"value="${proyecto.getNombre()}"/>
+						<button type="submit">Ver Informe</button>
+				  </form>
+                 
+              </tr>
+           	</c:forEach>
+                
+         
+            </table></div></div>
+            
+            
+          </div>
+        </div>
+      </div>
 
 
-				</div>
 
-			<div class="container">
-			</div>
+
 		</div>
 		<footer class="sticky-footer">
 		<div class="container">
@@ -137,8 +151,10 @@
 		<a class="scroll-to-top rounded" href="#page-top"> <i
 			class="fa fa-angle-up"></i>
 		</a>
+
+		
 	
-	
+
 		<!-- Logout Modal-->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,6 +178,9 @@
 				</div>
 			</div>
 		</div>
+
+
+
 
 
 		<!-- Bootstrap core JavaScript-->

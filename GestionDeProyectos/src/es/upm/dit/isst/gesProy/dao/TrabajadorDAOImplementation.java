@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import es.upm.dit.isst.gesProy.dao.model.Proyecto;
 import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 import es.upm.dit.isst.gesProy.dao.SessionFactoryService;
 
@@ -129,6 +130,24 @@ private static TrabajadorDAOImplementation instance = null;
 			session.close();
 		}
 		return nombreCompleto;
+	}
+	public List<Proyecto> getProyectosTrabajador(String email){
+		Trabajador trabajador = null;
+		List<Proyecto> proyectosTrabajador = new ArrayList<>();
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			trabajador = (Trabajador) session.createQuery("select t from Trabajador t where"
+					+ " t.email = :email")
+					.setParameter("email", email).uniqueResult();
+			proyectosTrabajador = trabajador.getProyectosTrabajador();
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally{
+			session.close();
+		}
+		return proyectosTrabajador;
 	}
 
 }

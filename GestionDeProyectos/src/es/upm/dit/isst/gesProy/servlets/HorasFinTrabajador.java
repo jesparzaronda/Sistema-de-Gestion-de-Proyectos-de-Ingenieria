@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.gesProy.dao.ProyectoDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.RegistroTrabajoDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.TrabajadorDAOImplementation;
+import es.upm.dit.isst.gesProy.dao.model.Proyecto;
 import es.upm.dit.isst.gesProy.dao.model.RegistroTrabajo;
 import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 
@@ -34,16 +36,19 @@ public class HorasFinTrabajador extends HttpServlet {
 		RegistroTrabajo registro = new RegistroTrabajo();
 		
 		double milisec = fechaFinal.getTimeInMillis() - fechaInicio.getTimeInMillis();
-		int horas = (int)milisec/3600000;
-		double restohora = milisec%3600000;
-		int minutos = (int)restohora/60000;
-		double restominuto = restohora%60000;
-		int segundos = (int)restominuto/1000;
 		
-		String tiempoTrabajado = String.valueOf(horas)+"h "+String.valueOf(minutos)+"min "+String.valueOf(segundos)+ "s ";
-		registro.setHorasTrabajadas(tiempoTrabajado);
+		registro.setHorasTrabajadas(milisec);
 		
-		String emailTrabajador = (String)req.getSession().getAttribute("trabajadorLogged");
+		String proyectoSeleccionado = (String) req.getSession().getAttribute("proyecto_seleccionado");
+		List<Proyecto> proyectos = ProyectoDAOImplementation.getInstance().readAllProyecto();
+		Proyecto proyectoBuscado = null;
+		for(Proyecto proyecto : proyectos) {
+			if ((proyecto.getNombre()).equals(proyectoSeleccionado)) {
+				proyectoBuscado = proyecto;
+			}
+		}
+		
+		String emailTrabajador = (String) req.getSession().getAttribute("trabajadorLogged");
 		List<Trabajador> trabajadores = TrabajadorDAOImplementation.getInstance().readAllTrabajador();
 		Trabajador trabajadorBuscado = null;
 		for(Trabajador trabajador : trabajadores) {
@@ -56,15 +61,16 @@ public class HorasFinTrabajador extends HttpServlet {
 		
 		registro.setHoraInicio(fechaInicio);
 		registro.setHoraFinal(fechaFinal);
-		//registro.setId_Proyecto(proyecto);
-		registro.setId_Trabajador(trabajadorBuscado);
+		registro.setId_Proyecto(proyectoBuscado.getNombre());
+		registro.setId_Trabajador(trabajadorBuscado.getNombre() +" "+ trabajadorBuscado.getApellidos());
+		registro.setEmpresa(trabajadorBuscado.getEmpresa().getNombre());
 		
 		RegistroTrabajoDAOImplementation.getInstance().createRegistro(registro);
 		resp.sendRedirect(req.getContextPath()+ "/AreaTrabajador.jsp");
 		
 				
 	}
-	}
+}
 
 	
 

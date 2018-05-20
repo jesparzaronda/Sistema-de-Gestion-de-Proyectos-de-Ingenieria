@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -25,15 +24,16 @@ public class RegistroTrabajo implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id_Registro;
 	
-	@ManyToOne
-	//@JoinColumn(name="Trabajadores")
-	private Trabajador trabajador;
-	@ManyToOne
-	private Proyecto proyecto;
+	
+	private String nombreTrabajador;
+	
+	private String nombreProyecto;
+	
+	private String nombreEmpresa;
 	
 	private Calendar horaInicio;
 	private Calendar horaFinal;
-	private String horasTrabajadas;
+	private double horasTrabajadas;
 	
 	
 	
@@ -49,11 +49,11 @@ public class RegistroTrabajo implements Serializable{
 	public void setId_Registro(int id_Registro) {
 		this.id_Registro = id_Registro;
 	}
-	public Trabajador getId_Trabajador() {
-		return trabajador;
+	public String getId_Trabajador() {
+		return nombreTrabajador;
 	}
-	public void setId_Trabajador(Trabajador trabajador) {
-		this.trabajador = trabajador;
+	public void setId_Trabajador(String nombreTrabajador) {
+		this.nombreTrabajador = nombreTrabajador;
 	}
 	public Calendar getHoraInicio() {
 		return horaInicio;
@@ -68,21 +68,28 @@ public class RegistroTrabajo implements Serializable{
 		this.horaFinal = horaFinal;
 	}
 	
-	//Aquí haria falta recorrer el string e ir guardando las horas, minutos y segunos para sumar el tiempo total
-//	public double getHorasTrabajadas() {
-//		return horasTrabajadas;
-//	}
-	public void setHorasTrabajadas(String tiempoTrabajado) {
+	
+	public double getHorasTrabajadas() {
+		return horasTrabajadas;
+	}
+	public void setHorasTrabajadas(double tiempoTrabajado) {
 		this.horasTrabajadas = tiempoTrabajado;
 	}
-	public Proyecto getId_Proyecto() {
-		return proyecto;
+	public String getId_Proyecto() {
+		return nombreProyecto;
 	}
-	public void setId_Proyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
+	public void setId_Proyecto(String nombreProyecto) {
+		this.nombreProyecto = nombreProyecto;
 	}
 	
+	public String getEmpresa() {
+		return nombreEmpresa;
+	}
 
+
+	public void setEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
 	
 
 }

@@ -33,9 +33,12 @@
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link" data-toggle="modal"
-				data-target="#añadirProyecto"> <i
+				title="Tables"><a class="nav-link"> <i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
+			</a></li>
+			<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				title="Tables"><a class="nav-link" href="AreaRecursos-proyectos.jsp"> <i
+					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Proyectos</span>
 			</a></li>
 			
 
@@ -70,7 +73,7 @@
 
 			<li class="nav-item"><a class="nav-link" data-toggle="modal"
 				data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout:
-					${proyecto_gestor}
+					${RRHHLogged}
 			</a></li>
 		</ul>
 	</div>
@@ -81,7 +84,7 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Área Recursos Humanos</a>
 				</li>
-				<li class="breadcrumb-item active">${proyecto_seleccionado}</li>
+				<li class="breadcrumb-item active">Trabajadores</li>
 			</ol>
 			<!-- Icon Cards-->
 			<div class="card mb-3">
@@ -105,21 +108,38 @@
               </thead>
               <tbody>                               
                 
+     
+                
+            <c:forEach items="${trabajadores_list}" var="trabajador">
               <tr role="row" class="odd">
-                  <td class="sorting_1">Airi Satou</td>
-                  <td>Trabajador</td>
-                  <td>33</td>
-                  <td>3</td>
+                  <td class="sorting_1">${trabajador.getNombre()} ${trabajador.getApellidos()}</td>
+                  <td>	
+                  	<c:choose>
+                  		<c:when test="${trabajador.getPrivilegios()==1}">
+                  			Trabajador
+                  		</c:when>
+                  		<c:when test="${trabajador.getPrivilegios()==2}">
+                  			Gestor
+                  		</c:when>
+                  		<c:when test="${trabajador.getPrivilegios()==3}">
+                  			Recursos Humanos
+                  		</c:when>
+                  	</c:choose>
+                  </td>
+                  <td>${trabajador.getEdad()}</td>
+                  <td>${trabajador.getProyectosTrabajador().size()}</td>
                   <td>188</td>
-                  <td><a href="AreaRecursos-trabajador.jsp">Ver informe</a></td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Angelica Ramos</td>
-                  <td>Gestor de Proyectos</td>
-                  <td>38</td>
-                  <td>2</td>
-                  <td>218</td>
-                  <td><a href="AreaRecursos-trabajador.jsp">Ver informe</a></td>
-                </tr></tbody>
+                  <td>
+                  
+                  <form action="RealizarInforme">
+					<input type="hidden" name="nombre_trabajador"value="${trabajador.getNombre()} ${trabajador.getApellidos()}"/>
+						<button type="submit">Ver Informe</button>
+				  </form>
+                 
+              </tr>
+           	</c:forEach>
+                
+         
             </table></div></div>
             
             
@@ -146,7 +166,29 @@
 		
 	
 
-
+		<!-- Logout Modal-->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to
+							Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">Select "Logout" below if you are
+						ready to end your current session.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="FormLogout">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 

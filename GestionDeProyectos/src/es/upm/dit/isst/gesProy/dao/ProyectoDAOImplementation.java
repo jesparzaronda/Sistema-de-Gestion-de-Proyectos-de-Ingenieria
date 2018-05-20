@@ -54,7 +54,7 @@ private static ProyectoDAOImplementation instance = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
 				session.beginTransaction();
-				session.update(proyecto);
+				session.saveOrUpdate(proyecto);
 				session.getTransaction().commit();
 			}catch (Exception e) {
 				
@@ -110,5 +110,6 @@ private static ProyectoDAOImplementation instance = null;
 		
 		return proyectos;
 	}
+	
 
 }
