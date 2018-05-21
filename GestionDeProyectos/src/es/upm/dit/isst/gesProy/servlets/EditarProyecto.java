@@ -49,10 +49,13 @@ public class EditarProyecto extends HttpServlet {
 		for(Proyecto proyecto : proyectos) {
 			if(proyecto_nombre.equals(proyecto.getNombre())) {
 				proyectoEscogido = proyecto;
+				System.out.println("/"+proyectoEscogido.getNombre()+"/");
+				
 			}	
 		}
 		
-		ProyectoDAOImplementation.getInstance().deleteProyecto(proyectoEscogido);
+	
+		//ProyectoDAOImplementation.getInstance().deleteProyecto(proyectoEscogido);
 		
 		//Actualizamos el nuevo Proyecto y redirigimos
 		if(nombre!=null && nombre!="") {
@@ -67,12 +70,12 @@ public class EditarProyecto extends HttpServlet {
 		if(empresaBuscada!=null) {
 			proyectoEscogido.setId_Empresa(empresaBuscada);
 		}
-		System.out.println("/"+fechaInicio+"/");
-		ProyectoDAOImplementation.getInstance().createProyecto(proyectoEscogido);
+		
+		//ProyectoDAOImplementation.getInstance().updateProyecto(proyectoEscogido);
 		req.getSession().setAttribute("proyecto_seleccionado", proyectoEscogido.getNombre());	
 		req.getSession().setAttribute("proyectos_list", ProyectoDAOImplementation.getInstance().readAllProyectosdeGestor(proyectoEscogido.getGestor()));
 		req.getSession().setAttribute("trabajadores_proyecto", proyectoEscogido.getTrabajadoresProyecto());	
-		resp.sendRedirect(req.getContextPath()+ "/AreaGestor.jsp");
+		resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 		
 		
 	}

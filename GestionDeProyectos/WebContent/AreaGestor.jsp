@@ -39,7 +39,7 @@
 						nuevo proyecto</span>
 			</a></li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link"> <i
+				title="Tables"><a class="nav-link" href="<%= request.getContextPath() + "/GestorToTrabajador"%>"> <i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajar
 						en mis proyectos</span>
 			</a></li>
@@ -80,8 +80,8 @@
 				class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
 				href="#" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
-					class="d-lg-none">Messages <span
-						class="badge badge-pill badge-primary">12 New</span>
+					class="d-lg-none">Mensajes <span
+						class="badge badge-pill badge-primary">12 Nuevos</span>
 				</span> <span class="indicator text-primary d-none d-lg-block"> <i
 						class="fa fa-fw fa-circle"></i>
 				</span>
@@ -90,8 +90,8 @@
 				class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown"
 				href="#" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-fw fa-bell"></i> <span
-					class="d-lg-none">Alerts <span
-						class="badge badge-pill badge-warning">6 New</span>
+					class="d-lg-none">Notificaciones <span
+						class="badge badge-pill badge-warning">6 Nuevas</span>
 				</span> <span class="indicator text-warning d-none d-lg-block"> <i
 						class="fa fa-fw fa-circle"></i>
 				</span>
@@ -119,6 +119,8 @@
 					<p>
 						<b>Nombre del proyecto: </b>${proyecto_seleccionado}</p>
 					<p>
+						<b>Empresa: </b>${nombre_empresa}</p>
+					<p>
 						<b>Gestor: </b>${proyecto_gestor}</p>
 					<button type="button" class="btn btn-info" data-toggle="modal"
 						data-target="#editarProyecto" style="margin-bottom: 20px;">Editar</button>
@@ -130,7 +132,7 @@
 
 					<button type="button" class="btn btn-info" data-toggle="modal"
 						data-target="#añadirTrabajador" style="margin-bottom: 20px;">Añadir</button>
-					<button type="button" class="btn btn-info" data-toggle="modal"
+					<button type="button" class="btn btn-danger" data-toggle="modal"
 						data-target="#eliminarTrabajador" style="margin-bottom: 20px;">Eliminar</button>
 
 
@@ -211,12 +213,13 @@
 								</div>
 								<div class="col-md-6">
 									<strong>Fecha inicio de proyecto:</strong><br> <input
-										class="form-control form-control-lg  text-center" type="text"
-										name="fechaInicio"> <br />
+										class="form-control form-control-lg  text-center" type="date"
+										name="fechaInicio"><br />
+										
 								</div>
 								<div class="col-md-6">
 									<strong>Fecha fin de proyecto:</strong><br> <input
-										class="form-control form-control-lg  text-center" type="text"
+										class="form-control form-control-lg  text-center" type="date"
 										name="fechaFinal"> <br />
 								</div>
 								<div class="col-md-6">
@@ -234,7 +237,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 
 				</div>
@@ -265,12 +268,12 @@
 								</div>
 								<div class="col-md-6">
 									<strong>Fecha inicio de proyecto:</strong><br> <input
-										class="form-control form-control-lg  text-center" type="text"
+										class="form-control form-control-lg  text-center" type="date"
 										name="fechaInicio" value="${proyecto.fechaInicio}"> <br />
 								</div>
 								<div class="col-md-6">
 									<strong>Fecha fin de proyecto:</strong><br> <input
-										class="form-control form-control-lg  text-center" type="text"
+										class="form-control form-control-lg  text-center" type="date"
 										name="fechaFinal" value="${proyecto.fechaFinal}"> <br />
 								</div>
 								<div class="col-md-6">
@@ -288,7 +291,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 
 				</div>
@@ -303,7 +306,7 @@
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">Eliminar Proyecto: ${proyecto.nombre}</h4>
+						<h4 class="modal-title">Eliminar Proyecto: ${proyecto_seleccionado}</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -313,10 +316,10 @@
 					<div class="modal-footer">	
 					<form class="form-contact" action="EliminarProyecto" >	
 						<input class="btn btn-default btn-lg-xl " name='boton'
-							type="submit" value="Eliminar" />	
+							type="submit" class="btn btn-danger" value="Eliminar" />	
 							
 					</form>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
 					</div>
 
 				</div>
@@ -345,7 +348,11 @@
 									<strong>Seleccionar trabajador:</strong><br> <select
 										name="trabajadorEscogido">
 										<c:forEach items="${trabajadores_list}" var="trabajador">
+										<c:choose>
+										<c:when test="${trabajador.getEmpresa().getNombre() eq nombre_empresa}">
 											<option>${trabajador.nombre} ${trabajador.apellidos}</option>
+										</c:when>
+										</c:choose>
 										</c:forEach>
 									</select>
 								</div>
@@ -360,7 +367,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 
 				</div>
@@ -386,7 +393,12 @@
 									<strong>Seleccionar trabajador:</strong><br> <select
 										name="trabajadorEscogido">
 										<c:forEach items="${trabajadores_list}" var="trabajador">
+										<c:choose>
+										<c:when test="${trabajador.getEmpresa().getNombre() eq nombre_empresa}">
 											<option>${trabajador.nombre} ${trabajador.apellidos}</option>
+										</c:when>
+										</c:choose>
+										
 										</c:forEach>
 									</select>
 								</div>
@@ -401,7 +413,7 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 
 				</div>
@@ -424,18 +436,16 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ready to
-							Leave?</h5>
+						<h5 class="modal-title" id="exampleModalLabel">¿Seguro que quiere salir?</h5>
 						<button class="close" type="button" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">Select "Logout" below if you are
-						ready to end your current session.</div>
+					<div class="modal-body">Seleccione "Logout" solo si está seguro/a de que quiere cerrar la sesión.</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button"
-							data-dismiss="modal">Cancel</button>
+							data-dismiss="modal">Cancelar</button>
 						<a class="btn btn-primary" href="FormLogout">Logout</a>
 					</div>
 				</div>

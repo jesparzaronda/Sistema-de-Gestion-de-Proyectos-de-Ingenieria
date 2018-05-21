@@ -33,11 +33,15 @@
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link" data-toggle="modal"
-				data-target="#añadirProyecto"> <i
+				title="Tables" ><a class="nav-link" href="AreaRecursos.jsp"> <i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
 			</a></li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				title="Tables"><a class="nav-link" href="AreaRecursos-proyectos.jsp"> <i
+					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Proyectos</span>
+			</a></li>
 			
+	
 
 			
 		</ul>
@@ -87,7 +91,7 @@
 		        <div class="col-xl-3 col-sm-6 mb-3">
 		          <div class="card text-white bg-primary o-hidden h-100">
 		            <div class="card-body">
-		                <div class="mr-5">26 Horas Trabajadas</div>
+		                <div class="mr-5">Tiempo trabajado: ${horas_trabajadas}</div>
 		            </div>
 		            
 		          </div>
@@ -96,7 +100,7 @@
 		          <div class="card text-white bg-warning o-hidden h-100">
 		            <div class="card-body">
 		              
-		              <div class="mr-5">${numProyectos} Proyectos</div>
+		              <div class="mr-5">Número de proyectos: ${numProyectos}</div>
 		            </div>
 		            
 		          </div>
@@ -104,7 +108,7 @@
 		        <div class="col-xl-3 col-sm-6 mb-3">
 		          <div class="card text-white bg-success o-hidden h-100">
 		            <div class="card-body">
-		              <div class="mr-5">Esfuerzo 78%</div>
+		              <div class="mr-5">Rendimiento ${rendimiento}%</div>
 		            </div>            
 		          </div>
 		        </div>        

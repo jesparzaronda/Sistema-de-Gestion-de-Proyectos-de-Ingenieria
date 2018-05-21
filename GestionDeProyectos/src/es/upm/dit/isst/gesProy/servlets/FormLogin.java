@@ -1,6 +1,7 @@
 package es.upm.dit.isst.gesProy.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,28 +41,46 @@ public class FormLogin extends HttpServlet {
 			if(trabajador.getPrivilegios() == 1) {
 				req.getSession().setAttribute("trabajadorLogged", email );
 				List<Proyecto> proyectosTrabajador = TrabajadorDAOImplementation.getInstance().getProyectosTrabajador(email);
+				req.getSession().setAttribute("privilegios", trabajador.getPrivilegios());
 				req.getSession().setAttribute("proyectos_trabajador", proyectosTrabajador);
-				req.getSession().setAttribute("proyecto_seleccionado", proyectosTrabajador.get(0).getNombre());
-				req.getSession().setAttribute("proyecto_trabajador", proyectosTrabajador.get(0).getGestor());
-				for(int i = 0; i< proyectosTrabajador.size(); i ++) {
-					System.out.println(proyectosTrabajador.get(i).getNombre());
+				if(proyectosTrabajador!=null && !proyectosTrabajador.isEmpty()) {
+					req.getSession().setAttribute("proyecto_seleccionado", proyectosTrabajador.get(0).getNombre());
+					req.getSession().setAttribute("proyecto_trabajador", proyectosTrabajador.get(0).getGestor());
 				}
+				
+				
 				resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
 			} else if(trabajador.getPrivilegios() == 2) {
+				req.getSession().setAttribute("privilegios", trabajador.getPrivilegios());
 				req.getSession().setAttribute("gestorLogged", email );
+				String gestorEmpresa= TrabajadorDAOImplementation.getInstance().readTrabajador(email).getEmpresa().getNombre();
+				req.getSession().setAttribute("nombre_empresa", gestorEmpresa);
 				req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
 				String nombreGestor = TrabajadorDAOImplementation.getInstance().obtenerNombreTrabajador(email);
 				List<Proyecto> proyectosGestor = ProyectoDAOImplementation.getInstance().readAllProyectosdeGestor(nombreGestor);
 				req.getSession().setAttribute("proyectos_list", proyectosGestor);
+				List<Proyecto> proyectosTrabajador = TrabajadorDAOImplementation.getInstance().getProyectosTrabajador(email);
+				req.getSession().setAttribute("proyectos_trabajador", proyectosTrabajador);
 				if(proyectosGestor!=null && !proyectosGestor.isEmpty()) {
 					req.getSession().setAttribute("proyecto_seleccionado", proyectosGestor.get(0).getNombre());
 					req.getSession().setAttribute("proyecto_gestor", proyectosGestor.get(0).getGestor());
 					req.getSession().setAttribute("trabajadores_proyecto", proyectosGestor.get(0).getTrabajadoresProyecto());
+					
 				}
 				resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 			}	else  if(trabajador.getPrivilegios() == 3) {
+				Trabajador recursosHumanos= TrabajadorDAOImplementation.getInstance().readTrabajador(email);
+				String empresaRecursosHumanos = recursosHumanos.getEmpresa().getNombre();
+				List<String> horasTotalesTrabajadores = new ArrayList<>();
+				List<Trabajador> listaTrabajadores = TrabajadorDAOImplementation.getInstance().readAllTrabajador();
+				req.getSession().setAttribute("privilegios", trabajador.getPrivilegios());
 				req.getSession().setAttribute("RRHHLogged", email );
-				req.getSession().setAttribute("trabajadores_list", TrabajadorDAOImplementation.getInstance().readAllTrabajador());
+				req.getSession().setAttribute("nombre_empresa", empresaRecursosHumanos);
+				for(int i = 0; i < listaTrabajadores.size(); i++) {
+					horasTotalesTrabajadores.add(RegistroTrabajoDAOImplementation.getInstance().calcularHorasTotales(listaTrabajadores.get(i).getNombre() + " " + listaTrabajadores.get(i).getApellidos()));
+				}
+				req.getSession().setAttribute("horas_list", horasTotalesTrabajadores);
+				req.getSession().setAttribute("trabajadores_list", listaTrabajadores);
 				req.getSession().setAttribute("proyectos_list", ProyectoDAOImplementation.getInstance().readAllProyecto());
 				
 				resp.sendRedirect(req.getContextPath() + "/AreaRecursos.jsp");

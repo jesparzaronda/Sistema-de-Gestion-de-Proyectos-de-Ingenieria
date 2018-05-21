@@ -33,7 +33,7 @@
             <div class="col-lg-4 offset-lg-4">
                   <form class="form-contact" action="FormLogin" >
                     
-                    <strong>Dirección correo:</strong><br>
+                    <strong>Dirección correo electrónico:</strong><br>
                     <input class="form-control form-control-lg  text-center" type="text" name="email" placeholder="Email"> <br />
                     <strong>Contraseña:</strong><br>
                     <input class="form-control form-control-lg text-center" type="password" name="password" placeholder="Contraseña" ><br />

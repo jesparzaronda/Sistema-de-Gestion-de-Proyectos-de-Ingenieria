@@ -37,7 +37,7 @@
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
 			</a></li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link" href="AreaRecursos-proyectos"> <i
+				title="Tables"><a class="nav-link" href="AreaRecursos-proyectos.jsp"> <i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Proyectos</span>
 			</a></li>
 
@@ -53,8 +53,8 @@
 				class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
 				href="#" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
-					class="d-lg-none">Messages <span
-						class="badge badge-pill badge-primary">12 New</span>
+					class="d-lg-none">Mensajes <span
+						class="badge badge-pill badge-primary">12 Nuevos</span>
 				</span> <span class="indicator text-primary d-none d-lg-block"> <i
 						class="fa fa-fw fa-circle"></i>
 				</span>
@@ -63,8 +63,8 @@
 				class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown"
 				href="#" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-fw fa-bell"></i> <span
-					class="d-lg-none">Alerts <span
-						class="badge badge-pill badge-warning">6 New</span>
+					class="d-lg-none">Notificaciones <span
+						class="badge badge-pill badge-warning">6 Nuevas</span>
 				</span> <span class="indicator text-warning d-none d-lg-block"> <i
 						class="fa fa-fw fa-circle"></i>
 				</span>
@@ -93,7 +93,7 @@
 					<p><b>Gestor: </b>${proyecto.getGestor()}</p>
 					<p><b>Fecha de Inicio: </b>${proyecto.getFechaInicio()}</p>
 					<p><b>Fecha de Fin: </b>${proyecto.getFechaFinal()}</p>
-					<p><b>Número de Trabajadores: </b></p>
+					<p><b>Número de Trabajadores: </b>${proyecto.getTrabajadoresProyecto().size() }</p>
 					
 					
 
@@ -113,7 +113,7 @@
 											<tr>
 												<th>Nombre</th>
 												<th>Fecha comienzo</th>
-												<th>Horas trabajaas</th>
+												<th>Horas trabajadas</th>
 											</tr>
 										</thead>
 

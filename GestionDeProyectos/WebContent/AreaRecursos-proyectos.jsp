@@ -112,12 +112,14 @@
      
                 
             <c:forEach items="${proyectos_list}" var="proyecto">
+            <c:choose>
+             <c:when test="${proyecto.getId_Empresa().getNombre() eq nombre_empresa}">
               <tr role="row" class="odd">
                   <td class="sorting_1">${proyecto.getNombre()} </td>
                   <td>       ${proyecto.getGestor()}           </td>
                   <td>${proyecto.getFechaInicio()}  </td>
                   <td>${proyecto.getFechaFinal()}  </td>
-                  <td>188</td>
+                  <td>${proyecto.getTrabajadoresProyecto().size()}</td>
                   <td>
                   
                   <form action="InformeProyecto">
@@ -126,6 +128,9 @@
 				  </form>
                  
               </tr>
+              </c:when>
+              </c:choose>
+              
            	</c:forEach>
                 
          

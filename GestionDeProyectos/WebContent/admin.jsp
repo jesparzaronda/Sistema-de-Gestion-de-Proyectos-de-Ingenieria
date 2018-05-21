@@ -73,7 +73,7 @@
                     	<input class="form-control form-control-lg  text-center" type="text" name="codigoPostal"> <br />
                     </div>  
                     <div class="col-md-6">
-                    	<strong>Télefono:</strong><br>
+                    	<strong>Teléfono:</strong><br>
                     	<input class="form-control form-control-lg  text-center" type="tel" name="telefono"> <br />
                     </div>  
                     <div class="col-md-6">
@@ -94,7 +94,7 @@
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 		      </div>
 		
 		    </div>
@@ -141,7 +141,7 @@
 	                   		<input class="form-control form-control-lg text-center" type="text" name="empresa"><br />
 	                   	</div>
 	                    <div class="col-md-12">
-	                    	<strong>Privilegios: (1 = trabajador; 2 = gestor de proyecto; 3 = recursos humanos)</strong><br>
+	                    	<strong>Privilegios: (1 = Trabajador; 2 = Gestor de Proyecto; 3 = Recursos Humanos)</strong><br>
 	                    	<input class="form-control form-control-lg text-center" type="text" name="privilegio"><br />
 	                    </div>
 	                    
@@ -153,7 +153,7 @@
 		     
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 		      </div>
 		
 		    </div>

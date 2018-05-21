@@ -33,7 +33,7 @@
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="Tables"><a class="nav-link"> <i
+				title="Tables"><a class="nav-link" href="AreaRecursos.jsp"> <i
 					class="fa fa-fw fa-circle"></i> <span class="nav-link-text">Trabajadores</span>
 			</a></li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
@@ -110,7 +110,11 @@
                 
      
                 
-            <c:forEach items="${trabajadores_list}" var="trabajador">
+            <c:forEach items="${trabajadores_list}" var="trabajador" varStatus="status">
+            <c:choose>
+            <c:when test="${trabajador.getEmpresa().getNombre() eq nombre_empresa}">
+            <c:choose>
+            <c:when test="${trabajador.getPrivilegios() != 3}">
               <tr role="row" class="odd">
                   <td class="sorting_1">${trabajador.getNombre()} ${trabajador.getApellidos()}</td>
                   <td>	
@@ -121,14 +125,11 @@
                   		<c:when test="${trabajador.getPrivilegios()==2}">
                   			Gestor
                   		</c:when>
-                  		<c:when test="${trabajador.getPrivilegios()==3}">
-                  			Recursos Humanos
-                  		</c:when>
-                  	</c:choose>
+                   	</c:choose>
                   </td>
                   <td>${trabajador.getEdad()}</td>
                   <td>${trabajador.getProyectosTrabajador().size()}</td>
-                  <td>188</td>
+                  <td>${horas_list[status.index]}</td>
                   <td>
                   
                   <form action="RealizarInforme">
@@ -137,6 +138,10 @@
 				  </form>
                  
               </tr>
+              </c:when>
+              </c:choose>
+              </c:when>
+              </c:choose>
            	</c:forEach>
                 
          

@@ -42,7 +42,7 @@
 							<form action="SeleccionarProyecto">
 								<input type="hidden" name="nombre_proy"
 									value="${proyecto.nombre}" />
-								<button type="submit">"${proyecto.nombre}"</button>
+								<button type="submit">${proyecto.nombre}</button>
 							</form>
 						</li>
 					</c:forEach>
@@ -62,8 +62,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
-            <span class="d-lg-none">Messages
-              <span class="badge badge-pill badge-primary">12 New</span>
+            <span class="d-lg-none">Mensajes
+              <span class="badge badge-pill badge-primary">12 Nuevos</span>
             </span>
             <span class="indicator text-primary d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
@@ -74,8 +74,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-bell"></i>
-            <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
+            <span class="d-lg-none">Notificaciones
+              <span class="badge badge-pill badge-warning">6 Nuevas</span>
             </span>
             <span class="indicator text-warning d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
@@ -107,8 +107,14 @@
           <p><b>Nombre del proyecto: </b>${proyecto_seleccionado}</p>
           <p><b>Gestor: </b>${proyecto_trabajador}</p>
 
-          <a type="button" class="btn btn-success" onClick="desactivar()" name="start" id="start" href="HorasIniTrabajador">Empezar</a>
-          <a type="button" class="btn btn-danger" disabled="" onClick="desactivar()" name="stop" id="stop" href="HorasFinTrabajador">Parar</a>
+          <a type="button" class="btn btn-success" action="desactivar()" name="start" id="start" href="HorasIniTrabajador">Empezar</a>
+          <a type="button" class="btn btn-danger" disabled="" action="desactivar()" name="stop" id="stop" href="HorasFinTrabajador">Parar</a>
+          <c:choose>
+          <c:when test="${privilegios == 2}">
+          <a type="button" class="btn btn-default" href="TrabajadorToGestor" id="VolverGestor">Volver Área Gestor</a>
+          
+          </c:when>
+          </c:choose>
           <script type="text/javascript">
 			function desactivar(){
 				if (document.getElementById('start').disabled == false){
@@ -149,7 +155,7 @@
                     <div class="mr-5">3 Nuevas tareas</div>
                   </div>
                   <a class="card-footer text-white clearfix small z-1" href="#">
-                    <span class="float-left">View Details</span>
+                    <span class="float-left">Ver Detalles</span>
                     <span class="float-right">
                       <i class="fa fa-angle-right"></i>
                     </span>
@@ -189,14 +195,14 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quiere salir?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">Seleccione "Logout" solo si está seguro/a de que quiere cerrar la sesión.</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
             <a class="btn btn-primary" href="FormLogout">Logout</a>
           </div>
         </div>

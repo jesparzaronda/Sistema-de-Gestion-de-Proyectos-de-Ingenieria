@@ -85,17 +85,24 @@ private static RegistroTrabajoDAOImplementation instance = null;
 			}
 		
 	}
-	public double calcularHorasTotales(Trabajador trabajador, Proyecto proyecto) {
+	public String calcularHorasTotales(String nombreTrabajador) {
 		List<RegistroTrabajo> listaRegistros = new ArrayList<>();
 		double tiempoTotalNumero = 0;
+		String respuesta = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			listaRegistros.addAll(session.createQuery("from RegistroTrabajo where :trabajador = trabajador and proyecto = :proyecto").setParameter("trabajador", trabajador).setParameter("proyecto", proyecto).list());
+			listaRegistros.addAll(session.createQuery("from RegistroTrabajo where :nombreTrabajador = nombreTrabajador").setParameter("nombreTrabajador", nombreTrabajador).list());
 			
 			for(int i = 0; i < listaRegistros.size(); i++) {
 				tiempoTotalNumero+=listaRegistros.get(i).getHorasTrabajadas();	
 			}
+			double hora = tiempoTotalNumero/3600000;
+			double restoHora = tiempoTotalNumero%3600000;
+			double minuto = restoHora/60000;
+			double restoMinuto = restoHora%60000;
+			double segundo = restoMinuto/1000;
+			respuesta = (int)hora + "h " + (int)minuto + "m " + (int)segundo + "s";
 		session.getTransaction().commit();
 		
 		}catch (Exception e) {
@@ -104,7 +111,7 @@ private static RegistroTrabajoDAOImplementation instance = null;
 				session.close();
 		}
 		
-		return tiempoTotalNumero;
+		return respuesta;
 	}
 
 	public List<Double> calcularHorasPorDia(Trabajador trabajador, Proyecto proyecto) {
@@ -168,6 +175,59 @@ private static RegistroTrabajoDAOImplementation instance = null;
 			session.close();
 		}
 		return respuesta;
+	}
+	
+	
+	public double horasTrabajadorEntero(String nombreTrabajador) {
+		List<RegistroTrabajo> listaRegistros = new ArrayList<>();
+		List<Double> listaTiempo = new ArrayList<>();
+		double tiempoTotalMilisegundos = 0;
+		double respuesta = 0;
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			listaRegistros.addAll( session.createQuery("from RegistroTrabajo where :nombreTrabajador = nombreTrabajador").setParameter("nombreTrabajador", nombreTrabajador).list());
+			for(int i = 0; i < listaRegistros.size(); i++) {
+				listaTiempo.add(listaRegistros.get(i).getHorasTrabajadas());
+			}
+			//Una vez sacado todos los tiempos, sumamos todos los milisegundos.
+			for(int i = 0; i < listaTiempo.size(); i++) {
+				tiempoTotalMilisegundos = tiempoTotalMilisegundos + listaTiempo.get(i);
+			}
+			
+			respuesta = tiempoTotalMilisegundos;		
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return respuesta;
+	}
+	
+	public double horasTrabajadoresEntero() {
+		List<RegistroTrabajo> listaRegistros = new ArrayList<>();
+		List<Double> listaTiempo = new ArrayList<>();
+		double tiempoTotalMilisegundos = 0;
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			listaRegistros.addAll( session.createQuery("from RegistroTrabajo").list());
+			for(int i = 0; i < listaRegistros.size(); i++) {
+				listaTiempo.add(listaRegistros.get(i).getHorasTrabajadas());
+			}
+			//Una vez sacado todos los tiempos, sumamos todos los milisegundos.
+			for(int i = 0; i < listaTiempo.size(); i++) {
+				tiempoTotalMilisegundos = tiempoTotalMilisegundos + listaTiempo.get(i);
+			}
+					
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return tiempoTotalMilisegundos;
 	}
 	
 }

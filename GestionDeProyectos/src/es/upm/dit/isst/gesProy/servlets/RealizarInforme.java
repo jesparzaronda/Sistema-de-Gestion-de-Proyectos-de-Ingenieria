@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.gesProy.dao.RegistroTrabajoDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.TrabajadorDAOImplementation;
 import es.upm.dit.isst.gesProy.dao.model.Trabajador;
 
@@ -37,12 +38,24 @@ public class RealizarInforme extends HttpServlet {
 			}	
 		}
 		
-		//Calculo de rendimiento 
-
+		String horasTrabajadas =  RegistroTrabajoDAOImplementation.getInstance().calcularHorasTotales(trabajadorEscogido.getNombre() + " " + trabajadorEscogido.getApellidos());
+		
+		//Calculo de rendimiento 		
+		double horasTrabajadasTrabajador = RegistroTrabajoDAOImplementation.getInstance().horasTrabajadorEntero(trabajadorEscogido.getNombre() + " " + trabajadorEscogido.getApellidos());
+		double horasTotales = RegistroTrabajoDAOImplementation.getInstance().horasTrabajadoresEntero();
+		double numTrabajadores = 0;
+		for(Trabajador trabajador : trabajadores) {
+			if(trabajador.getPrivilegios()==1 || trabajador.getPrivilegios()==1) {
+				numTrabajadores++;
+			}
+		}
+		int rendimiento =  (int) (numTrabajadores*50*horasTrabajadasTrabajador/horasTotales);
 		
 		//Actualizamos y redirigimos
+		req.getSession().setAttribute("horas_trabajadas", horasTrabajadas);
 		req.getSession().setAttribute("trabajador", trabajadorEscogido);
 		req.getSession().setAttribute("numProyectos", trabajadorEscogido.getProyectosTrabajador().size());
+		req.getSession().setAttribute("rendimiento", rendimiento);
 		resp.sendRedirect(req.getContextPath() + "/AreaRecursos-trabajador.jsp");
 	}
 

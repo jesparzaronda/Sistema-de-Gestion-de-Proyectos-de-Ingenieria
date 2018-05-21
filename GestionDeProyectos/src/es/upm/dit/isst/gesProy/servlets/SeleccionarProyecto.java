@@ -43,15 +43,13 @@ public class SeleccionarProyecto extends HttpServlet {
 		req.getSession().setAttribute("proyecto_seleccionado", proyectoEscogido.getNombre());	
 		req.getSession().setAttribute("trabajadores_proyecto", proyectoEscogido.getTrabajadoresProyecto());
 		req.getSession().setAttribute("proyecto_gestor", proyectoEscogido.getGestor());
-		if(req.getSession().getAttribute("gestorLogged") != null) {
+		if(req.getSession().getAttribute("gestorLogged") != null && req.getSession().getAttribute("trabajadorLogged") == null) {
 			List<String> horasTrabajador = new ArrayList<>();
 			for(int i = 0; i < proyectoEscogido.getTrabajadoresProyecto().size(); i++) {
 				String nombreTrabajador = proyectoEscogido.getTrabajadoresProyecto().get(i).getNombre() + " " + proyectoEscogido.getTrabajadoresProyecto().get(i).getApellidos();
 				horasTrabajador.add(RegistroTrabajoDAOImplementation.getInstance().horasTrabajadorPorProyecto(nombreTrabajador, proyectoEscogido.getNombre()));
 			}
-			for (int i = 0; i < horasTrabajador.size(); i++) {
-				System.out.println(horasTrabajador.get(i));
-			}
+			
 			req.getSession().setAttribute("lista_horas", horasTrabajador);
 		resp.sendRedirect(req.getContextPath() + "/AreaGestor.jsp");
 		}
@@ -65,12 +63,10 @@ public class SeleccionarProyecto extends HttpServlet {
 				}	
 			}
 			
-			List<Double> horasPorDia = RegistroTrabajoDAOImplementation.getInstance().calcularHorasPorDia(trabajadorEscogido, proyectoEscogido);
+			//List<Double> horasPorDia = RegistroTrabajoDAOImplementation.getInstance().calcularHorasPorDia(trabajadorEscogido, proyectoEscogido);
 			
-			req.getSession().setAttribute("horas_por_dia", horasPorDia);
-			for(int i=0; i<horasPorDia.size(); i++) {
-				System.out.println(horasPorDia.get(i));
-			}
+			//req.getSession().setAttribute("horas_por_dia", horasPorDia);
+			req.getSession().setAttribute("proyecto_trabajador", proyectoEscogido.getGestor());
 			
 			resp.sendRedirect(req.getContextPath() + "/AreaTrabajador.jsp");
 			
